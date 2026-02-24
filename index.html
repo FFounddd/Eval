@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HOUSE GLASSWRIGHT – PSYCHOLOGICAL ARCHIVE</title>
+<title>HOUSE GLASSWRIGHT - BLACKSITE PSYCHOLOGICAL DOSSIER</title>
 
 <style>
 body {
@@ -36,6 +36,7 @@ select, button {
     padding: 1in;
     box-shadow: 0 0 25px rgba(0,0,0,0.6);
     position: relative;
+    line-height: 1.4;
 }
 
 .header {
@@ -52,7 +53,7 @@ select, button {
 }
 
 .section {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .label {
@@ -60,19 +61,20 @@ select, button {
     text-transform: uppercase;
     font-size: 12px;
     letter-spacing: 1px;
+    margin-bottom: 5px;
 }
 
 .stamp {
     position: absolute;
-    top: 180px;
-    right: 50px;
+    top: 220px;
+    right: 60px;
     transform: rotate(-15deg);
     border: 4px solid rgba(150,0,0,0.7);
     color: rgba(150,0,0,0.7);
-    padding: 10px 20px;
-    font-size: 28px;
+    padding: 12px 30px;
+    font-size: 36px;
     font-weight: bold;
-    opacity: 0.2;
+    opacity: 0.12;
     pointer-events: none;
 }
 
@@ -90,158 +92,244 @@ select, button {
 <body>
 
 <div id="ui">
-    HOUSE GLASSWRIGHT PSYCHOLOGICAL ARCHIVE<br><br>
-    <select id="fileSelect"></select>
-    <button onclick="loadFile()">Load File</button>
-    <button onclick="window.print()">Print</button>
+HOUSE GLASSWRIGHT BLACKSITE DOSSIER ARCHIVE<br><br>
+<select id="fileSelect"></select>
+<button onclick="loadFile()">Load File</button>
+<button onclick="window.print()">Print</button>
 </div>
 
 <div id="document">
-    <div class="header">
-        <h1>HOUSE GLASSWRIGHT</h1>
-        BLACKSITE PSYCHOLOGICAL EVALUATION
-    </div>
-    <div id="content"></div>
+<div class="header">
+<h1>HOUSE GLASSWRIGHT</h1>
+BLACKSITE PSYCHOLOGICAL DOSSIER - INTERNAL
+</div>
+<div id="content"></div>
 </div>
 
 <script>
 
 const files = {
 
-"Dr. Alric Vaelor": `
-<div class="section"><div class="label">Role</div>
-Arcane Systems Engineer</div>
-<div class="section"><div class="label">Clearance Level</div>
-Level II</div>
-<div class="section"><div class="label">Summary</div>
-Demonstrates procedural loyalty and emotional detachment under structural stress conditions.</div>
-<div class="section"><div class="label">Concerns</div>
-Increasing tendency to refer to personnel as variables rather than individuals.</div>
-<div class="section"><div class="label">Recommendation</div>
-Retain assignment. Monitor empathy erosion markers.</div>
+"Dr. Ilyra Thorne": `
+<div class="section">
+<div class="label">Role & Clearance</div>
+MXD-34 Bio-Integration Specialist - Level IV Executive Access
+</div>
+
+<div class="section">
+<div class="label">Professional Background</div>
+Dr. Thorne joined House Glasswright 11 years prior to current assignment. Specialized in cross-soul integration matrices and dual-host compatibility architecture. Former academic tenure terminated after ethical review conflict involving irreversible spiritual bonding trials.
+</div>
+
+<div class="section">
+<div class="label">Behavioral Profile</div>
+Demonstrates advanced compartmentalization under morally destabilizing conditions. During MXD-34 simulation briefings, cortisol levels elevated 18% above baseline when designation referred to as “infrastructure.” No spike when referred to as “asset.”
+</div>
+
+<div class="section">
+<div class="label">Interpersonal Observations</div>
+Avoids extended eye contact when discussing secondary life source viability. Frequently rephrases irreversible procedures in passive voice. Exhibits subtle protective language patterns when describing MXD-34.
+</div>
+
+<div class="section">
+<div class="label">Stress Response Analysis</div>
+Maintains composure during live integration drills. Post-session recovery period extended beyond predicted norm (7 minutes longer than baseline staff average).
+</div>
+
+<div class="section">
+<div class="label">Interview Excerpt</div>
+“Designation determines outcome. If we define it correctly, it becomes survivable.”
+</div>
+
+<div class="section">
+<div class="label">Catastrophic Event Suitability</div>
+Technical Reliability: Exceptional<br>
+Moral Resilience: Fracturing<br>
+Likelihood to Follow Override: High<br>
+Likelihood to Hesitate Under Emotional Trigger: Moderate
+</div>
+
+<div class="section">
+<div class="label">Executive Recommendation</div>
+Retain. Indispensable expertise. Monitor attachment variance closely during transfer escalation.
+</div>
 `,
 
 "Dr. Selene Morvane": `
-<div class="section"><div class="label">Role</div>
-Neural Compliance Researcher</div>
-<div class="section"><div class="label">Clearance Level</div>
-Level III</div>
-<div class="section"><div class="label">Summary</div>
-High cognitive empathy; low affective empathy. Observes emotional destabilization with analytical detachment.</div>
-<div class="section"><div class="label">Concerns</div>
-Exhibits curiosity toward subject rupture events.</div>
-<div class="section"><div class="label">Recommendation</div>
-Limit unsupervised subject exposure.</div>
-`,
+<div class="section">
+<div class="label">Role & Clearance</div>
+Neural Compliance Researcher - Level III
+</div>
 
-"Dr. Ilyra Thorne": `
-<div class="section"><div class="label">Role</div>
-MXD-34 Bio-Integration Specialist</div>
-<div class="section"><div class="label">Clearance Level</div>
-Level IV</div>
-<div class="section"><div class="label">Summary</div>
-Displays compartmentalization regarding MXD-34 designation and function.</div>
-<div class="section"><div class="label">Concerns</div>
-Attachment variance detected when referring to secondary life source.</div>
-<div class="section"><div class="label">Recommendation</div>
-Maintain assignment. Monitor emotional deviation.</div>
-`,
+<div class="section">
+<div class="label">Professional Background</div>
+Cognitive-emotional modeling specialist recruited from private compliance firm. Known for predictive accuracy in high-volatility subjects.
+</div>
 
-"Prof. Garrick Halwen": `
-<div class="section"><div class="label">Role</div>
-Containment Protocol Analyst</div>
-<div class="section"><div class="label">Clearance Level</div>
-Level III</div>
-<div class="section"><div class="label">Summary</div>
-Strong utilitarian reasoning. Acceptable loss margin tolerance high.</div>
-<div class="section"><div class="label">Concerns</div>
-Underestimates unpredictable human variables.</div>
-<div class="section"><div class="label">Recommendation</div>
-Retain authority. Implement oversight redundancy.</div>
-`,
+<div class="section">
+<div class="label">Behavioral Profile</div>
+High cognitive empathy. Low affective empathy. Observes destabilization events with analytic detachment. Demonstrates elevated engagement during rupture simulations.
+</div>
 
-"Dr. Caelis Viremont": `
-<div class="section"><div class="label">Role</div>
-Crystal Harmonics Theorist</div>
-<div class="section"><div class="label">Clearance Level</div>
-Level II</div>
-<div class="section"><div class="label">Summary</div>
-Heightened sensory sensitivity to arcane resonance fluctuations.</div>
-<div class="section"><div class="label">Concerns</div>
-Reports harmonic “tone shift” phenomena during MXD-34 escalation.</div>
-<div class="section"><div class="label">Recommendation</div>
-Limit prolonged exposure to core instability.</div>
-`,
+<div class="section">
+<div class="label">Interpersonal Observations</div>
+Minimal social bonding with staff. Tends to document emotional spikes in clinical fascination terms.
+</div>
 
-"Architect Lysa Dathren": `
-<div class="section"><div class="label">Role</div>
-AKS Structural Architect</div>
-<div class="section"><div class="label">Clearance Level</div>
-Level III</div>
-<div class="section"><div class="label">Summary</div>
-Identifies personally with armor structural integrity metrics.</div>
-<div class="section"><div class="label">Concerns</div>
-Defensive when ethical implications of armor design are raised.</div>
-<div class="section"><div class="label">Recommendation</div>
-Maintain structural oversight role.</div>
-`,
+<div class="section">
+<div class="label">Interview Excerpt</div>
+“Pain is data. Rage is pattern recognition.”
+</div>
 
-"Archivist Rowan Mirth": `
-<div class="section"><div class="label">Role</div>
-Classified Data Archivist</div>
-<div class="section"><div class="label">Clearance Level</div>
-Level IV</div>
-<div class="section"><div class="label">Summary</div>
-Strong record retention accuracy. Elevated anxiety during executive override reviews.</div>
-<div class="section"><div class="label">Concerns</div>
-Moral distress markers detected during Red Protocol archival access.</div>
-<div class="section"><div class="label">Recommendation</div>
-Increase audit frequency.</div>
-`,
+<div class="section">
+<div class="label">Catastrophic Event Suitability</div>
+Predictive Stability: High<br>
+Emotional Detachment: Extreme<br>
+Ethical Override Resistance: Low
+</div>
 
-"Dr. Verin Kael": `
-<div class="section"><div class="label">Role</div>
-Emotional Conditioning Specialist</div>
-<div class="section"><div class="label">Clearance Level</div>
-Level IV</div>
-<div class="section"><div class="label">Summary</div>
-Frames coercion as optimization. Persuasive aptitude high.</div>
-<div class="section"><div class="label">Concerns</div>
-Displays superiority bias regarding behavioral manipulation outcomes.</div>
-<div class="section"><div class="label">Recommendation</div>
-Maintain assignment. Monitor influence scope.</div>
+<div class="section">
+<div class="label">Executive Recommendation</div>
+Continue neural oversight. Restrict autonomy during peak escalation.
+</div>
 `,
 
 "Captain Ardyn Kess": `
-<div class="section"><div class="label">Role</div>
-Blacksite Tactical Coordinator</div>
-<div class="section"><div class="label">Clearance Level</div>
-Level III – Security Command</div>
-<div class="section"><div class="label">Summary</div>
-Stable under active threat conditions. Strong personnel-protection instinct.</div>
-<div class="section"><div class="label">Concerns</div>
-Moral hesitation during Red Protocol casualty modeling.</div>
-<div class="section"><div class="label">Recommendation</div>
-Retain position. Limit executive override disclosure.</div>
+<div class="section">
+<div class="label">Role & Clearance</div>
+Blacksite Tactical Coordinator - Level III Security Command
+</div>
+
+<div class="section">
+<div class="label">Professional Background</div>
+Former field operations commander. Transferred to Glasswright internal security after demonstrating personnel preservation success in unstable arcane containment environments.
+</div>
+
+<div class="section">
+<div class="label">Behavioral Profile</div>
+Strong protective instincts toward staff. Elevated stress markers when reviewing Red Protocol mass-casualty simulations.
+</div>
+
+<div class="section">
+<div class="label">Interpersonal Observations</div>
+Refers to research staff by name rather than designation. Has confronted executive liaison twice regarding collateral thresholds.
+</div>
+
+<div class="section">
+<div class="label">Interview Excerpt</div>
+“Containment shouldn’t mean sacrifice is automatic.”
+</div>
+
+<div class="section">
+<div class="label">Catastrophic Event Suitability</div>
+Crisis Leadership: Exceptional<br>
+Executive Compliance: Conditional<br>
+Probability of Defying Override: Moderate
+</div>
+
+<div class="section">
+<div class="label">Executive Recommendation</div>
+Retain command authority. Do not disclose full override chain.
+</div>
 `
+"Dr. Alric Vaelor": `
+<div class="section">
+<div class="label">Role & Clearance</div>
+Arcane Systems Engineer - Level II
+</div>
+
+<div class="section">
+<div class="label">Professional Background</div>
+Dr. Vaelor specializes in large-scale arcane infrastructure reinforcement. Previously oversaw two containment lattice stabilization projects with zero structural collapse incidents. Known for prioritizing architectural resilience over human comfort metrics.
+</div>
+
+<div class="section">
+<div class="label">Behavioral Profile</div>
+Exhibits strong procedural loyalty. During high-fatality simulation modeling, heart rate remained within optimal engineering baseline. Frequently reframes ethical concerns as structural inevitabilities.
+</div>
+
+<div class="section">
+<div class="label">Interpersonal Observations</div>
+Refers to personnel as “operational variables.” Limited emotional bonding observed. Respects competence above all other traits.
+</div>
+
+<div class="section">
+<div class="label">Interview Excerpt</div>
+“Failure is never emotional. It is always structural.”
+</div>
+
+<div class="section">
+<div class="label">Catastrophic Event Suitability</div>
+Structural Decision-Making: Exceptional<br>
+Emotional Interference: Minimal<br>
+Override Compliance Probability: High
+</div>
+
+<div class="section">
+<div class="label">Executive Recommendation</div>
+Retain. Monitor for complete affective dissociation.
+</div>
+`,
+
+"Prof. Garrick Halwen": `
+<div class="section">
+<div class="label">Role & Clearance</div>
+Containment Protocol Analyst - Level III
+</div>
+
+<div class="section">
+<div class="label">Professional Background</div>
+Former academic authority in risk mathematics and catastrophic event modeling. Recruited following publication on “Acceptable Loss Optimization in Magical Disaster Containment.”
+</div>
+
+<div class="section">
+<div class="label">Behavioral Profile</div>
+Demonstrates high utilitarian alignment. During Red Protocol simulations involving full staff loss, emotional markers remained statistically negligible.
+</div>
+
+<div class="section">
+<div class="label">Interpersonal Observations</div>
+Maintains professional detachment. Frequently challenges security objections as “sentimentally inefficient.”
+</div>
+
+<div class="section">
+<div class="label">Interview Excerpt</div>
+“If the system survives, the decision was correct.”
+</div>
+
+<div class="section">
+<div class="label">Catastrophic Event Suitability</div>
+Red Protocol Activation Confidence: Absolute<br>
+Ethical Flexibility: High<br>
+Executive Loyalty: Strong
+</div>
+
+<div class="section">
+<div class="label">Executive Recommendation</div>
+Retain protocol authority. Assign parallel ethical observer to mitigate tunnel vision.
+</div>
+`,
 
 };
 
 const select = document.getElementById("fileSelect");
 
 for (let key in files) {
-    const option = document.createElement("option");
-    option.value = key;
-    option.textContent = key;
-    select.appendChild(option);
+const option = document.createElement("option");
+option.value = key;
+option.textContent = key;
+select.appendChild(option);
 }
 
 function loadFile() {
-    document.getElementById("content").innerHTML = files[select.value];
-    const stamp = document.createElement("div");
-    stamp.className = "stamp";
-    stamp.innerText = "CLASSIFIED";
-    document.getElementById("document").appendChild(stamp);
+document.getElementById("content").innerHTML = files[select.value];
+
+if (!document.querySelector(".stamp")) {
+const stamp = document.createElement("div");
+stamp.className = "stamp";
+stamp.innerText = "CLASSIFIED";
+document.getElementById("document").appendChild(stamp);
+}
 }
 
 </script>
